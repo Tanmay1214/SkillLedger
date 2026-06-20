@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🔐 SkillLedger</h1>
+  <h1>SkillLedger</h1>
   <p><strong>Verify what you built. Prove what you know.</strong></p>
   <p>An AI-powered developer portfolio platform that transforms your GitHub repositories into verified, evidence-backed proof of your skills — for recruiters who care about real work.</p>
 
@@ -9,15 +9,15 @@
     <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python" />
     <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript" />
     <img src="https://img.shields.io/badge/SQLite%20%7C%20PostgreSQL-ready-336791?style=flat-square&logo=postgresql" />
-    <img src="https://img.shields.io/badge/GLM--4%20Flash-AI%20Powered-FF4B4B?style=flat-square" />
+    <img src="https://img.shields.io/badge/GLM--5.1-AI%20Powered-FF4B4B?style=flat-square" />
   </p>
 </div>
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
-> _Drop your screenshots into `docs/screenshots/` to make these appear!_
+> Drop your screenshots into `docs/screenshots/` to populate this section.
 
 | Portfolio Page | Dashboard | Repository Analysis |
 |---|---|---|
@@ -29,32 +29,32 @@
 
 ---
 
-## 🚀 What is SkillLedger?
+## Overview
 
 SkillLedger is a full-stack portfolio intelligence platform. Connect your GitHub account, import repositories, and the system automatically:
 
 1. **Analyzes** your code for complexity, security, and documentation quality
-2. **Extracts verified skills** using GLM-4 AI — with confidence scores and real evidence
-3. **Verifies deployments** — live URL scanning, SSL, security headers, asset health
-4. **Quantifies your contribution** — commit history, file ownership, module authorship
+2. **Extracts verified skills** using GLM-5.1 AI with confidence scores and code evidence
+3. **Verifies deployments** — live URL scanning, SSL validation, security headers, asset health
+4. **Quantifies contributions** — commit history, file ownership, module authorship
 5. **Generates a public portfolio** at `/u/{username}` with scores, skill charts, and project cards
 
-No self-reporting. No fluff. Just proof.
+No self-reporting. No fluff. Just verifiable proof.
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 SkillLedger
 ├── backend/                  # FastAPI + Python 3.11
 │   ├── app/
 │   │   ├── api/              # Route handlers (auth, repos, skills, contributions, portfolio)
-│   │   ├── services/         # Business logic & AI integrations
+│   │   ├── services/         # Business logic and AI integrations
 │   │   ├── models/           # SQLAlchemy ORM models
 │   │   ├── schemas/          # Pydantic request/response schemas
-│   │   ├── database/         # Session management, Base, migrations
-│   │   └── core/             # Config, security utils
+│   │   ├── database/         # Session management, base, migrations
+│   │   └── core/             # Config, security utilities
 │   ├── alembic/              # Database migrations
 │   └── tests/
 │
@@ -62,8 +62,8 @@ SkillLedger
     └── src/
         ├── app/
         │   ├── dashboard/    # Authenticated dashboard
-        │   ├── repositories/ # Repository detail & analysis views
-        │   └── u/[username]/ # 🌍 Public portfolio page
+        │   ├── repositories/ # Repository detail and analysis views
+        │   └── u/[username]/ # Public portfolio page
         ├── components/
         │   ├── auth/
         │   ├── portfolio/    # PortfolioView, score rings, skill bars
@@ -74,89 +74,94 @@ SkillLedger
 
 ---
 
-## ✨ Feature Modules
+## Modules
 
-### 1. 🔐 GitHub OAuth Authentication
+### GitHub OAuth Authentication
 - Secure GitHub OAuth 2.0 login flow
-- HTTP-only cookie session management (access + refresh JWT)
-- Auto token refresh middleware
+- HTTP-only cookie session management with access and refresh JWTs
+- Automatic token refresh middleware
 
-### 2. 📦 Repository Import System
-- Browse all your GitHub repositories
-- One-click import with full metadata sync (stars, forks, languages, frameworks)
-- Background repository cloning and analysis queue
+### Repository Import System
+- Browse and import GitHub repositories with one click
+- Full metadata sync — stars, forks, languages, frameworks, dependencies
+- Background cloning and analysis queue
 
-### 3. 🧠 Repository Intelligence Engine
+### Repository Intelligence Engine
 - Code complexity scoring (0–100)
 - Security vulnerability scanning
 - Documentation coverage analysis
 - Commit history aggregation
 
-### 4. 🤖 GLM Skill Extraction Service (AI)
-- Powered by **Zhipu AI GLM-4 Flash**
-- Extracts verified skills with confidence scores (0–100) from real code evidence
+### GLM Skill Extraction Service
+- Powered by **Zhipu AI GLM-5.1**
+- Extracts verified skills with confidence scores (0–100) backed by code evidence
 - Categories: Language, Framework, Database, DevOps, AI/ML, Security
-- Generates recruiter-friendly project summaries and insights
+- Generates recruiter-friendly project summaries and technical insights
 
-### 5. 🌐 Deployment Verification Engine
-- Auto-discovers live deployment URLs (Vercel, Netlify, Railway, custom)
-- Checks reachability, SSL certificate, security headers
+### Deployment Verification Engine
+- Auto-discovers live deployment URLs (Vercel, Netlify, Railway, custom domains)
+- Validates reachability, SSL certificates, and security response headers
 - Asset health scoring and internal link validation
 - Deployment Score (0–100)
 
-### 6. 👥 Contribution Verification Engine
-- Per-contributor commit analysis (additions, deletions, ownership %)
+### Contribution Verification Engine
+- Per-contributor commit analysis — additions, deletions, ownership percentage
 - Module-level file ownership mapping
 - Activity score computation
 - Evidence-backed contribution reports
 
-### 7. 📊 Dynamic Portfolio Generator
-- Public portfolio at `/u/{username}` — fully automated, zero manual editing
+### Dynamic Portfolio Generator
+- Public portfolio at `/u/{username}` — fully automated, no manual input required
 - **Build Score** = `0.4 × Complexity + 0.3 × Security + 0.3 × Documentation`
 - **Proof Score** = `0.5 × Deployment Score + 0.5 × Contribution %`
 - Animated SVG score rings and skill confidence bars
-- Filter projects by type, deployment status, and tech stack
-- Instant loading skeleton + SEO-ready metadata
+- Filterable projects by type, deployment status, and technology stack
+- Loading skeleton and SEO-ready metadata per page
 
 ---
 
-## 📡 API Reference
+## API Reference
 
 All endpoints are prefixed with `/api/v1`.
 
-### Auth
+### Authentication
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/auth/github/login` | Get GitHub OAuth URL |
+| `GET` | `/auth/github/login` | Get GitHub OAuth redirect URL |
 | `GET` | `/auth/github/callback` | OAuth callback handler |
-| `GET` | `/auth/me` | Get current user |
-| `POST` | `/auth/logout` | Logout and clear cookies |
-| `POST` | `/auth/refresh` | Rotate token pair |
+| `GET` | `/auth/me` | Get current authenticated user |
+| `POST` | `/auth/logout` | Logout and clear session cookies |
+| `POST` | `/auth/refresh` | Rotate access and refresh tokens |
 
 ### Repositories
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/repositories/github` | List GitHub repos |
-| `POST` | `/repositories/import` | Import a repository |
-| `GET` | `/repositories` | List imported repos |
-| `GET` | `/repositories/{id}` | Get repo details |
-| `GET` | `/repositories/{id}/analysis` | Get analysis report |
 
-### Skills & Insights
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/skills/extract/{repo_id}` | Run GLM skill extraction |
+| `GET` | `/repositories/github` | List all GitHub repositories |
+| `POST` | `/repositories/import` | Import a repository |
+| `GET` | `/repositories` | List imported repositories |
+| `GET` | `/repositories/{id}` | Get repository details |
+| `GET` | `/repositories/{id}/analysis` | Get full analysis report |
+
+### Skills and Insights
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/skills/extract/{repo_id}` | Run GLM-5.1 skill extraction |
 | `GET` | `/skills/{repo_id}` | Get extracted skills |
-| `GET` | `/insights/{repo_id}` | Get recruiter insights |
+| `GET` | `/insights/{repo_id}` | Get recruiter-facing project insights |
 
 ### Deployments
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `POST` | `/deployments/discover/{repo_id}` | Auto-discover deployment URL |
-| `POST` | `/deployments/verify/{repo_id}` | Run deployment scan |
+| `POST` | `/deployments/verify/{repo_id}` | Run full deployment scan |
 | `GET` | `/deployments/report/{repo_id}` | Get latest deployment report |
 
 ### Contributions
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `POST` | `/contributions/analyze/{repo_id}` | Run contribution analysis |
@@ -165,6 +170,7 @@ All endpoints are prefixed with `/api/v1`.
 | `GET` | `/contributions/{repo_id}/ownership` | Module ownership breakdown |
 
 ### Portfolio (Public)
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `GET` | `/portfolio/{username}` | Full portfolio aggregation |
@@ -173,7 +179,7 @@ All endpoints are prefixed with `/api/v1`.
 
 ---
 
-## 🗄️ Database Schema
+## Database Schema
 
 ```
 users ──────────────────── repositories
@@ -191,9 +197,10 @@ skills  project_insights  contribution_reports  module_ownerships
 
 ---
 
-## 🛠️ Local Development Setup
+## Local Development
 
 ### Prerequisites
+
 - Python 3.11+
 - Node.js 18+
 - Git
@@ -205,31 +212,31 @@ git clone https://github.com/Tanmay1214/SkillLedger.git
 cd SkillLedger
 ```
 
-### 2. Backend Setup
+### 2. Backend
 
 ```bash
 cd backend
 
-# Create virtual environment
+# Create and activate virtual environment
 python -m venv .venv
 .venv\Scripts\activate        # Windows
-# source .venv/bin/activate   # macOS/Linux
+# source .venv/bin/activate   # macOS / Linux
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Configure environment
+# Configure environment variables
 cp .env.example .env
 # Edit .env — add your GitHub OAuth credentials and GLM API key
 
-# Run database migrations
+# Apply database migrations
 alembic upgrade head
 
-# Start the backend
+# Start the development server
 uvicorn app.main:app --reload --port 8000
 ```
 
-### 3. Frontend Setup
+### 3. Frontend
 
 ```bash
 cd frontend
@@ -240,62 +247,63 @@ npm install
 # Configure environment (optional — defaults to localhost:8000)
 cp .env.example .env.local
 
-# Start the dev server
+# Start the development server
 npm run dev
 ```
 
-### 4. Open in browser
+### 4. Access the application
 
 | URL | Description |
 |-----|-------------|
-| `http://localhost:3000` | Main app |
-| `http://localhost:8000/docs` | Interactive API docs |
-| `http://localhost:3000/u/{username}` | Your public portfolio |
+| `http://localhost:3000` | Main application |
+| `http://localhost:8000/docs` | Interactive API documentation |
+| `http://localhost:3000/u/{username}` | Public portfolio page |
 
 ---
 
-## 🔑 Environment Variables
+## Environment Variables
 
-Copy `.env.example` to `.env` and fill in your values.
+Copy `.env.example` to `.env` and fill in the required values.
 
 | Variable | Required | Description |
 |---|---|---|
-| `DATABASE_URL` | ✅ | SQLite or PostgreSQL connection string |
-| `GITHUB_CLIENT_ID` | ✅ | From GitHub OAuth App settings |
-| `GITHUB_CLIENT_SECRET` | ✅ | From GitHub OAuth App settings |
-| `JWT_SECRET` | ✅ | Random secret (`openssl rand -hex 32`) |
-| `GLM_API_KEY` | ✅ | From [Zhipu AI](https://open.bigmodel.cn/) |
-| `GEMINI_API_KEY` | ❌ | Optional — reserved for future use |
-| `FRONTEND_URL` | ✅ | `http://localhost:3000` in development |
-| `CORS_ORIGINS` | ✅ | Comma-separated allowed origins |
+| `DATABASE_URL` | Yes | SQLite or PostgreSQL connection string |
+| `GITHUB_CLIENT_ID` | Yes | From GitHub OAuth App settings |
+| `GITHUB_CLIENT_SECRET` | Yes | From GitHub OAuth App settings |
+| `JWT_SECRET` | Yes | Random secret — generate with `openssl rand -hex 32` |
+| `GLM_API_KEY` | Yes | From [Zhipu AI Open Platform](https://open.bigmodel.cn/) — used for GLM-5.1 |
+| `GEMINI_API_KEY` | No | Optional — reserved for future integrations |
+| `FRONTEND_URL` | Yes | `http://localhost:3000` in development |
+| `CORS_ORIGINS` | Yes | Comma-separated list of allowed origins |
 
 ### Setting up GitHub OAuth
-1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
-2. Click **New OAuth App**
-3. Homepage URL: `http://localhost:3000`
-4. Callback URL: `http://localhost:8000/api/v1/auth/github/callback`
-5. Copy **Client ID** and **Client Secret** into your `.env`
 
-### Getting a GLM API Key
+1. Go to [GitHub Developer Settings](https://github.com/settings/developers) and create a new OAuth App
+2. Set **Homepage URL** to `http://localhost:3000`
+3. Set **Authorization callback URL** to `http://localhost:8000/api/v1/auth/github/callback`
+4. Copy the **Client ID** and **Client Secret** into your `.env`
+
+### Getting a GLM-5.1 API Key
+
 1. Register at [Zhipu AI Open Platform](https://open.bigmodel.cn/)
-2. Go to **API Keys** in your dashboard
-3. Create a new key and set it as `GLM_API_KEY`
+2. Navigate to **API Keys** in your dashboard
+3. Create a new key and set it as `GLM_API_KEY` in your `.env`
 
 ---
 
-## 🐳 Docker Compose
+## Docker Compose
 
 ```bash
-# Start all services (backend + frontend + postgres)
+# Start all services (backend, frontend, PostgreSQL)
 docker-compose up -d
 
-# Run migrations
+# Apply database migrations
 docker-compose exec backend alembic upgrade head
 ```
 
 ---
 
-## 🧪 Tests
+## Tests
 
 ```bash
 # Backend tests
@@ -306,48 +314,48 @@ pytest tests/ -v
 cd frontend
 npx tsc --noEmit
 
-# Frontend build
+# Frontend production build
 npm run build
 ```
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
-- [ ] Shareable portfolio cards with OG image generation
-- [ ] PDF export of portfolio
-- [ ] Recruiter view — compare candidates side-by-side
-- [ ] Webhook-based auto-refresh on new pushes
-- [ ] Email verification of GitHub identity
+- [ ] Shareable portfolio cards with Open Graph image generation
+- [ ] PDF export of verified portfolio
+- [ ] Recruiter view — side-by-side candidate comparison
+- [ ] Webhook-based auto-refresh on repository push events
+- [ ] GitHub identity verification via email
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Pull requests are welcome! For major changes, please open an issue first.
+Pull requests are welcome. For significant changes, please open an issue first to discuss the proposed changes.
 
 ```bash
 git checkout -b feat/your-feature
-# make changes
+# implement changes
 git push origin feat/your-feature
-# open a PR on GitHub
+# open a pull request on GitHub
 ```
 
 ---
 
-## 📄 License
+## License
 
 MIT © [Tanmay](https://github.com/Tanmay1214)
 
 ---
 
 <div align="center">
-  <p>Built with ❤️ using FastAPI, Next.js, and GLM-4 AI</p>
+  <p>Built with FastAPI, Next.js, and Zhipu AI GLM-5.1</p>
   <p>
-    <a href="https://github.com/Tanmay1214/SkillLedger">⭐ Star this repo</a>
-    ·
-    <a href="https://github.com/Tanmay1214/SkillLedger/issues">🐛 Report Bug</a>
-    ·
-    <a href="https://github.com/Tanmay1214/SkillLedger/issues">✨ Request Feature</a>
+    <a href="https://github.com/Tanmay1214/SkillLedger">Star this repo</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/Tanmay1214/SkillLedger/issues">Report a Bug</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/Tanmay1214/SkillLedger/issues">Request a Feature</a>
   </p>
 </div>
