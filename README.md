@@ -1,10 +1,7 @@
-<![CDATA[<div align="center">
-  <h1>🔐 ProofForge</h1>
+<div align="center">
+  <h1>🔐 SkillLedger</h1>
   <p><strong>Verify what you built. Prove what you know.</strong></p>
-  <p>
-    An AI-powered developer portfolio platform that transforms your GitHub repositories into
-    verified, evidence-backed proof of your skills — for recruiters who care about real work.
-  </p>
+  <p>An AI-powered developer portfolio platform that transforms your GitHub repositories into verified, evidence-backed proof of your skills — for recruiters who care about real work.</p>
 
   <p>
     <img src="https://img.shields.io/badge/FastAPI-0.115-009688?style=flat-square&logo=fastapi" />
@@ -20,11 +17,11 @@
 
 ## 📸 Screenshots
 
-> _Screenshots coming soon — drop yours in `docs/screenshots/` and update the links below!_
+> _Drop your screenshots into `docs/screenshots/` to make these appear!_
 
 | Portfolio Page | Dashboard | Repository Analysis |
 |---|---|---|
-| ![Portfolio Page](docs/screenshots/portfolio.png) | ![Dashboard](docs/screenshots/dashboard.png) | ![Analysis](docs/screenshots/analysis.png) |
+| ![Portfolio](docs/screenshots/portfolio.png) | ![Dashboard](docs/screenshots/dashboard.png) | ![Analysis](docs/screenshots/analysis.png) |
 
 | Skills Panel | Contribution Verification | Deployment Verification |
 |---|---|---|
@@ -32,12 +29,12 @@
 
 ---
 
-## 🚀 What is ProofForge?
+## 🚀 What is SkillLedger?
 
-ProofForge is a full-stack portfolio intelligence platform. You connect your GitHub account, import repositories, and the system automatically:
+SkillLedger is a full-stack portfolio intelligence platform. Connect your GitHub account, import repositories, and the system automatically:
 
 1. **Analyzes** your code for complexity, security, and documentation quality
-2. **Extracts verified skills** using GLM-4 AI — with confidence scores and evidence
+2. **Extracts verified skills** using GLM-4 AI — with confidence scores and real evidence
 3. **Verifies deployments** — live URL scanning, SSL, security headers, asset health
 4. **Quantifies your contribution** — commit history, file ownership, module authorship
 5. **Generates a public portfolio** at `/u/{username}` with scores, skill charts, and project cards
@@ -49,10 +46,10 @@ No self-reporting. No fluff. Just proof.
 ## 🏗️ Architecture
 
 ```
-ProofForge
+SkillLedger
 ├── backend/                  # FastAPI + Python 3.11
 │   ├── app/
-│   │   ├── api/              # Route handlers (auth, repos, skills, contributions, portfolio…)
+│   │   ├── api/              # Route handlers (auth, repos, skills, contributions, portfolio)
 │   │   ├── services/         # Business logic & AI integrations
 │   │   ├── models/           # SQLAlchemy ORM models
 │   │   ├── schemas/          # Pydantic request/response schemas
@@ -98,12 +95,12 @@ ProofForge
 ### 4. 🤖 GLM Skill Extraction Service (AI)
 - Powered by **Zhipu AI GLM-4 Flash**
 - Extracts verified skills with confidence scores (0–100) from real code evidence
-- Categories: Language, Framework, Database, DevOps, AI/ML, Security…
-- Generates human-readable project summaries and recruiter-friendly insights
+- Categories: Language, Framework, Database, DevOps, AI/ML, Security
+- Generates recruiter-friendly project summaries and insights
 
 ### 5. 🌐 Deployment Verification Engine
-- Auto-discovers live deployment URLs (Vercel, Netlify, Railway, custom…)
-- Checks reachability, SSL certificate status, security headers
+- Auto-discovers live deployment URLs (Vercel, Netlify, Railway, custom)
+- Checks reachability, SSL certificate, security headers
 - Asset health scoring and internal link validation
 - Deployment Score (0–100)
 
@@ -114,12 +111,12 @@ ProofForge
 - Evidence-backed contribution reports
 
 ### 7. 📊 Dynamic Portfolio Generator
-- Public portfolio at `/u/{username}` — fully automated, no manual editing
+- Public portfolio at `/u/{username}` — fully automated, zero manual editing
 - **Build Score** = `0.4 × Complexity + 0.3 × Security + 0.3 × Documentation`
 - **Proof Score** = `0.5 × Deployment Score + 0.5 × Contribution %`
-- Animated SVG score rings, skill confidence bars
-- Filter projects by type, deployment status, tech stack
-- Instant loading skeleton, SEO-ready metadata
+- Animated SVG score rings and skill confidence bars
+- Filter projects by type, deployment status, and tech stack
+- Instant loading skeleton + SEO-ready metadata
 
 ---
 
@@ -133,7 +130,7 @@ All endpoints are prefixed with `/api/v1`.
 | `GET` | `/auth/github/login` | Get GitHub OAuth URL |
 | `GET` | `/auth/github/callback` | OAuth callback handler |
 | `GET` | `/auth/me` | Get current user |
-| `POST` | `/auth/logout` | Logout (clears cookies) |
+| `POST` | `/auth/logout` | Logout and clear cookies |
 | `POST` | `/auth/refresh` | Rotate token pair |
 
 ### Repositories
@@ -181,19 +178,15 @@ All endpoints are prefixed with `/api/v1`.
 ```
 users ──────────────────── repositories
                                │
-               ┌───────────────┼───────────────────────────────┐
-               │               │                               │
-    repository_analyses    contributors                  deployment_reports
-    (complexity, security,  (commits, additions,         (url, ssl, score,
-     documentation scores)   ownership %, activity)      provider, headers)
-               │
-    ┌──────────┼──────────────────────┐
-    │          │                      │
-  skills   project_insights   contribution_reports   module_ownerships
-(skill_name, (project_type,   (primary_contributor,  (username, module,
- confidence,  summary,         ownership_score,       ownership %)
- category,    complexity_level) contribution_summary)
- evidence)
+           ┌───────────────────┼──────────────────────┐
+           │                   │                      │
+  repository_analyses     contributors         deployment_reports
+  (complexity, security,  (commits, ownership  (url, ssl, score,
+   documentation scores)   %, activity score)   headers, provider)
+           │
+  ┌────────┼──────────────────────┐
+  │        │                      │
+skills  project_insights  contribution_reports  module_ownerships
 ```
 
 ---
@@ -206,12 +199,14 @@ users ──────────────────── repositories
 - Git
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/Tanmay1214/SkillLedger.git
 cd SkillLedger
 ```
 
 ### 2. Backend Setup
+
 ```bash
 cd backend
 
@@ -235,57 +230,60 @@ uvicorn app.main:app --reload --port 8000
 ```
 
 ### 3. Frontend Setup
+
 ```bash
 cd frontend
 
 # Install dependencies
 npm install
 
-# Configure environment
+# Configure environment (optional — defaults to localhost:8000)
 cp .env.example .env.local
-# Edit .env.local if needed (default points to localhost:8000)
 
 # Start the dev server
 npm run dev
 ```
 
 ### 4. Open in browser
-- **App**: http://localhost:3000
-- **API Docs**: http://localhost:8000/docs
-- **Your Portfolio**: http://localhost:3000/u/{your-github-username}
+
+| URL | Description |
+|-----|-------------|
+| `http://localhost:3000` | Main app |
+| `http://localhost:8000/docs` | Interactive API docs |
+| `http://localhost:3000/u/{username}` | Your public portfolio |
 
 ---
 
 ## 🔑 Environment Variables
 
-Copy `.env.example` → `.env` (root) and `backend/.env.example` → `backend/.env`.
+Copy `.env.example` to `.env` and fill in your values.
 
 | Variable | Required | Description |
 |---|---|---|
-| `DATABASE_URL` | ✅ | SQLite (`sqlite+aiosqlite:///./skillledger.db`) or PostgreSQL DSN |
+| `DATABASE_URL` | ✅ | SQLite or PostgreSQL connection string |
 | `GITHUB_CLIENT_ID` | ✅ | From GitHub OAuth App settings |
 | `GITHUB_CLIENT_SECRET` | ✅ | From GitHub OAuth App settings |
-| `JWT_SECRET` | ✅ | Random hex string (`openssl rand -hex 32`) |
-| `GLM_API_KEY` | ✅ | From [Zhipu AI](https://open.bigmodel.cn/) — used for skill extraction |
-| `GEMINI_API_KEY` | ❌ | Optional — reserved for future Gemini features |
+| `JWT_SECRET` | ✅ | Random secret (`openssl rand -hex 32`) |
+| `GLM_API_KEY` | ✅ | From [Zhipu AI](https://open.bigmodel.cn/) |
+| `GEMINI_API_KEY` | ❌ | Optional — reserved for future use |
 | `FRONTEND_URL` | ✅ | `http://localhost:3000` in development |
 | `CORS_ORIGINS` | ✅ | Comma-separated allowed origins |
 
 ### Setting up GitHub OAuth
 1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
 2. Click **New OAuth App**
-3. Set **Homepage URL**: `http://localhost:3000`
-4. Set **Authorization callback URL**: `http://localhost:8000/api/v1/auth/github/callback`
-5. Copy the **Client ID** and **Client Secret** into your `.env`
+3. Homepage URL: `http://localhost:3000`
+4. Callback URL: `http://localhost:8000/api/v1/auth/github/callback`
+5. Copy **Client ID** and **Client Secret** into your `.env`
 
 ### Getting a GLM API Key
 1. Register at [Zhipu AI Open Platform](https://open.bigmodel.cn/)
 2. Go to **API Keys** in your dashboard
-3. Create a new key and paste it as `GLM_API_KEY`
+3. Create a new key and set it as `GLM_API_KEY`
 
 ---
 
-## 🐳 Docker Compose (PostgreSQL stack)
+## 🐳 Docker Compose
 
 ```bash
 # Start all services (backend + frontend + postgres)
@@ -297,7 +295,7 @@ docker-compose exec backend alembic upgrade head
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Tests
 
 ```bash
 # Backend tests
@@ -308,7 +306,7 @@ pytest tests/ -v
 cd frontend
 npx tsc --noEmit
 
-# Frontend build verification
+# Frontend build
 npm run build
 ```
 
@@ -316,12 +314,11 @@ npm run build
 
 ## 🗺️ Roadmap
 
-- [ ] Shareable portfolio cards (OG image generation)
-- [ ] Multi-repo skill aggregation with ranking
+- [ ] Shareable portfolio cards with OG image generation
 - [ ] PDF export of portfolio
 - [ ] Recruiter view — compare candidates side-by-side
-- [ ] Email verification of GitHub identity
 - [ ] Webhook-based auto-refresh on new pushes
+- [ ] Email verification of GitHub identity
 
 ---
 
@@ -330,12 +327,10 @@ npm run build
 Pull requests are welcome! For major changes, please open an issue first.
 
 ```bash
-# Fork, clone, create a branch
 git checkout -b feat/your-feature
-
-# Make your changes, then push
+# make changes
 git push origin feat/your-feature
-# Open a PR on GitHub
+# open a PR on GitHub
 ```
 
 ---
@@ -356,4 +351,3 @@ MIT © [Tanmay](https://github.com/Tanmay1214)
     <a href="https://github.com/Tanmay1214/SkillLedger/issues">✨ Request Feature</a>
   </p>
 </div>
-]]>
