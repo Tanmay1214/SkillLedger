@@ -1,0 +1,28 @@
+# SkillLedger backend — pinned for reproducible builds.
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+SQLAlchemy==2.0.36
+asyncpg==0.30.0
+alembic==1.14.0
+pydantic==2.10.4
+pydantic-settings==2.7.0
+email-validator==2.2.0
+PyJWT==2.10.1
+httpx==0.28.1
+python-multipart==0.0.20
+psycopg2-binary==2.9.10  # used by Alembic's sync engine
+
+# ---- Dev / test ----
+pytest==8.3.4
+pytest-asyncio==0.25.0
+aiosqlite==0.20.0
+pytest-cov==6.0.0
+httpx==0.28.1
+respx==0.22.0           # mock httpx calls to GitHub
+anyio==4.7.0
+ruff==0.8.4
+mypy==1.14.0
+GitPython==3.1.43
+lizard==1.17.10
+beautifulsoup4==4.12.3
+

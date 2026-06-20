@@ -1,0 +1,62 @@
+# =============================================================================
+# SkillLedger — Full Stack (Frontend + Backend + Postgres)
+# Run:  docker compose up --build
+# =============================================================================
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: skillledger-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: skillledger
+      POSTGRES_PASSWORD: skillledger
+      POSTGRES_DB: skillledger
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U skillledger -d skillledger"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: skillledger-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Override DSN so the backend talks to the `db` service on the compose network
+      DATABASE_URL: postgresql+asyncpg://skillledger:skillledger@db:5432/skillledger
+      FRONTEND_URL: http://localhost:3000
+      BACKEND_URL: http://localhost:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000/api/v1
+    container_name: skillledger-frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api/v1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
